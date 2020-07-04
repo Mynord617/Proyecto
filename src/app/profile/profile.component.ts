@@ -4,10 +4,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
 import { Usuario } from '../models/usuario.models';
 
+//import Swal from 'sweetalert2';
+//import swal from 'sweetalert';
+import swal from 'sweetalert';
 
 //import { AngularFirestore } from '@angular/fire/firestore';
 //import { Observable } from 'rxjs';
-
 //declare function init_plugins();
 
 @Component({
@@ -16,6 +18,7 @@ import { Usuario } from '../models/usuario.models';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
   forma: FormGroup;
   constructor(
     public _usuarioService: UsuarioService,
@@ -41,14 +44,28 @@ export class ProfileComponent implements OnInit {
 
   }
   registrarUsuario() {
+
+
+    swal({
+      title: "FELICIDADES!",
+      text: "Usted se registro exitosamente a la vinculacion \nCASA HOGAR DE LA NIÑEZ",
+      icon: "success",
+      //dangerMode: true,
+    })
+    .then(function () {
+      window.location.href = "/dashboard";
+    }); 
     // Llamado y creacion de Usuario
-    // tslint:disable-next-line: prefer-const
+    // tslint:disable-next-line: prefer-const 
     let usuario = new Usuario(
-      this.forma.value.nombre,
-      this.forma.value.email,
-      this.forma.value.password
-    );
-    this._usuarioService.crearUsuario(usuario)
-      .subscribe(resp => this.router.navigate(['/profile']));
+    this.forma.value.nombre,
+    this.forma.value.email,
+    this.forma.value.password
+  );
+
+this._usuarioService.crearUsuario(usuario)
+  .subscribe(resp => this.router.navigate(["/profile"]));
+  
   }
+
 }

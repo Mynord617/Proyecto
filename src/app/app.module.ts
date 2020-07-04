@@ -34,7 +34,17 @@ import { Perfil11Component } from './perfiles/perfil11/perfil11.component';
 import { Perfil12Component } from './perfiles/perfil12/perfil12.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { HttpClientModule } from '@angular/common/http';
+
+
+// SERVICES DE LA DB
 import { UsuarioService } from './services/usuario/usuario.service';
+import { Perfil1Service } from './services/perfil1/perfil1.service';
+import { Perfil2Service } from './services/perfil2/perfil2.service';
+
+import { Perfil6Service } from './services/perfil6/perfil6.service';
+import { Perfil7Service } from './services/perfil7/perfil7.service';
+import { Perfil8Service } from './services/perfil8/perfil8.service';
+import { Perfil3Service, Perfil4Service, Perfil5Service } from './services/service.index';
 
 
 const routes = [
@@ -85,14 +95,22 @@ const routes = [
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
-    UsuarioService
+    UsuarioService,
+    Perfil1Service,
+    Perfil2Service,
+    Perfil3Service,
+    Perfil4Service,
+    Perfil5Service,
+    Perfil6Service,
+    Perfil7Service,
+    Perfil8Service
   ],
   bootstrap: [AppComponent]
 })

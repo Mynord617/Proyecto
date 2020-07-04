@@ -1,102 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UsuarioService } from '../../services/service.index';
+import { Usuario } from '../../models/usuario.models';
 @Component({
   selector: 'app-perfil10',
   templateUrl: './perfil10.component.html',
   styleUrls: ['./perfil10.component.css']
 })
+
 export class Perfil10Component implements OnInit {
+  forma: FormGroup;
+  constructor(
+    public _usuarioService: UsuarioService,
+    public router: Router
+  ) { }
 
-  constructor() { }
+  ngOnInit() {
+    //init_plugins();
+    this.forma = new FormGroup({
+      nombre: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, Validators.required),
+      condiciones: new FormControl(false),
+    });
 
-  ngOnInit(): void {
-  }
-  var1: number;
-  var2: number;
-  resultado: number;
-
-  onSuma(): void {
-    this.resultado = this.var1 + this.var2;
-  }
-
-  edicion1(): void {
-    this.mostrar1 = true;
-    this.mostrar2 = false;
-    this.mostrar3 = false;
-    this.mostrar4 = false;
-    this.mostrar5 = false;
-    this.mostrar6 = false;
-    this.mostrar7 = false;
-
-  }
-  mostrar1: boolean;
-
-  edicion2(): void {
-    this.mostrar1 = false;
-    this.mostrar2 = true;
-    this.mostrar3 = false;
-    this.mostrar4 = false;
-    this.mostrar5 = false;
-    this.mostrar6 = false;
-    this.mostrar7 = false;
-  }
-  mostrar2: boolean;
-
-  edicion3(): void {
-    this.mostrar1 = false;
-    this.mostrar2 = false;
-    this.mostrar3 = true;
-    this.mostrar4 = false;
-    this.mostrar5 = false;
-    this.mostrar6 = false;
-    this.mostrar7 = false;
+    // Rellenar campos de forma automatica 
+    this.forma.setValue({
+      nombre: '',
+      email: '',
+      password: '',
+      condiciones: true
+    });
 
   }
-  mostrar3: boolean;
-
-  edicion4(): void {
-    this.mostrar1 = false;
-    this.mostrar2 = false;
-    this.mostrar3 = false;
-    this.mostrar4 = true;
-    this.mostrar5 = false;
-    this.mostrar6 = false;
-    this.mostrar7 = false;
+  registrarUsuario() {
+    // Llamado y creacion de Usuario
+    // tslint:disable-next-line: prefer-const
+    let usuario = new Usuario(
+      this.forma.value.nombre,
+      this.forma.value.email,
+      this.forma.value.password
+    );
+    this._usuarioService.crearUsuario(usuario)
+      .subscribe(resp => this.router.navigate(['/dashboard']));
   }
-  mostrar4: boolean;
-
-  edicion5(): void {
-    this.mostrar1 = false;
-    this.mostrar2 = false;
-    this.mostrar3 = false;
-    this.mostrar4 = false;
-    this.mostrar5 = true;
-    this.mostrar6 = false;
-    this.mostrar7 = false;
-  }
-  mostrar5: boolean;
-
-  edicion6(): void {
-    this.mostrar1 = false;
-    this.mostrar2 = false;
-    this.mostrar3 = false;
-    this.mostrar4 = false;
-    this.mostrar5 = false;
-    this.mostrar6 = true;
-    this.mostrar7 = false;
-  }
-  mostrar6: boolean;
-
-
-  edicion7(): void {
-    this.mostrar1 = false;
-    this.mostrar2 = false;
-    this.mostrar3 = false;
-    this.mostrar4 = false;
-    this.mostrar5 = false;
-    this.mostrar6 = false;
-    this.mostrar7 = true;
-  }
-  mostrar7: boolean;
-
 }

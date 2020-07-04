@@ -8,15 +8,14 @@ import { URL_SERVICIOS } from '../../config/config';
   providedIn: 'root'
 })
 export class UsuarioService {
-  constructor(
-  public http: HttpClient
+  constructor(
+    public http: HttpClient
   ) {
-  console.log('Servicio de Usuario Listo!!!');
+    console.log('Servicio de Usuario Listo!!!');
   }
-  crearUsuario( usuario: Usuario){
-  // tslint:disable-next-line: prefer-const
-  let url = URL_SERVICIOS + '/usuario';
-  return this.http.post( url, usuario );
+  crearUsuario(usuario: Usuario) {
+    // tslint:disable-next-line: prefer-const
+    let url = URL_SERVICIOS + '/usuario';
+    return this.http.post(url, usuario);
   }
-  }
-  
+}
